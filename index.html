@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock, Paper, Scissors</title>
+    </head>
+    <body>
+        
+
+
+
+        <script>
+        const plays = ["Rock", "Paper", "Scissors"]
+
+
+        function computerPlay() {
+            return Math.floor(Math.random() * 3)
+        }
+
+        
+        function playRound(playerSelection, computerSelection) {
+            playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+            if (plays.indexOf(playerSelection) == -1) {
+                console.log(`Sorry, but ${playerSelection} is an invalid play. =(`)
+                return -2
+            }
+            
+            console.log("You played: " + playerSelection);
+            console.log("The Computer Played: " + plays[computerSelection]);
+
+            if (playerSelection == plays[computerSelection - 1] ) {
+                console.log(`You Lose! ${plays[computerSelection]} beats ${playerSelection}`);
+                return -1
+            } else if (playerSelection == plays[computerSelection]) {
+                console.log(`Its a Draw! ${plays[computerSelection]} is equal to ${playerSelection}`);
+                return 0
+            } else {
+                console.log(`You win! ${playerSelection} beats ${plays[computerSelection]}`);
+                return 1
+            }
+        }
+        
+        function game() {
+            let i = 0;
+            let result;
+            let playerSelection;
+            let score = [0, 0]
+
+            while (i < 5) {
+                playerSelection = prompt("Your Play?")
+                result = playRound(playerSelection, computerPlay())
+                switch (result) {
+                    case 1:
+                        score[0] = score[0] + 1;
+                        break;
+                    case -1:
+                        score[1] = score[1] + 1;
+                        break;
+                    case 0:
+                        i--
+                        break;
+                    case -2:
+                        i--;
+                        break;
+                }
+                console.log(`Current Score: \n You: ${score[0]} vs Machine: ${score[1]}`)
+                i++;
+            }
+            if (score[0] > score[1]) {
+                console.log("You won!!!")
+            } else {
+                console.log("The computer won!!!")
+            }
+            return 0
+
+            
+
+        }
+
+
+        </script>
+    </body>
+</html>
